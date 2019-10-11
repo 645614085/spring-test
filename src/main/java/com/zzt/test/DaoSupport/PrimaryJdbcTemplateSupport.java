@@ -1,5 +1,6 @@
 package com.zzt.test.DaoSupport;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -22,7 +23,7 @@ public class PrimaryJdbcTemplateSupport extends JdbcDaoSupport {
 
     @PostConstruct
     void setPrimaryJdbcTemplate(){
-        this.setJdbcTemplate(jdbcTemplate);
+        setJdbcTemplate(jdbcTemplate);
     }
 
 

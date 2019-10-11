@@ -27,7 +27,7 @@ import static java.lang.System.setOut;
 public class IndexController {
 
     @Resource(name = "primaryJdbcTemplate")
-    private JdbcTemplate primaryJdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
 
     @Resource
@@ -55,7 +55,7 @@ public class IndexController {
         List userPojos =  secondJdbcTemplate.query("select id as id,user_name as name,user_password as pwd,user_email as email from blog_user",rowMapper);
         userPojos.forEach(out::println);
 
-        List userPojoList = primaryJdbcTemplate.query("select id as id,user_name as name,user_password as pwd,user_email as email from blog_user",rowMapper);
+        List userPojoList = jdbcTemplate.query("select id as id,user_name as name,user_password as pwd,user_email as email from blog_user",rowMapper);
         userPojoList.forEach(out::println);
     }
 
