@@ -13,7 +13,6 @@ public class TestApplication {
     Config config;
 
     public static void main(String[] args) {
-
         SpringApplication.run(TestApplication.class, args);
     }
 

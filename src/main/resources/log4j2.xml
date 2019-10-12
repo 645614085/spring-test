@@ -64,7 +64,7 @@
     <Loggers>
         <!--过滤掉spring的一些无用的DEBUG信息-->
         <logger name="org.springframework" level="INFO"></logger>
-        <Root level="Debug">
+        <Root level="info">
             <AppenderRef ref="Console" />
             <AppenderRef ref="InfoFile" />
             <AppenderRef ref="WarnFile" />
