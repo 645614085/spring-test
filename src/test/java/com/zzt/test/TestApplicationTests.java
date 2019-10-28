@@ -18,6 +18,8 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -59,17 +61,40 @@ public class TestApplicationTests {
     @Resource(name = "RedissonClient")
     RedissonClient redissonClient;
 
+
+    private Integer auto=0;
+
+    CountDownLatch countDownLatch = new CountDownLatch(1000);
+
     /**
      * redisson 测试
      */
     @Test
-    public void redissonTest() throws ClassNotFoundException {
+    public void redissonTest() throws ClassNotFoundException, InterruptedException {
+
+        Thread.currentThread().setName("主线程：");
+
+        for (int i=0;i<1000;i++){
+            new Thread(() -> {
+//                  RLock  lock = redissonClient.getLock("redission_test3");
+//                  lock.lock(10,TimeUnit.SECONDS);
+                  logger.info("变量值：[auto={}]",++auto);
+//                  lock.unlock();
+                   Random a = new Random();
+                  countDownLatch.countDown();
+            }).start();
+        }
+
+        countDownLatch.await();
+
        RLock lock = redissonClient.getLock("redisson_lock1");
        lock.lock(10, TimeUnit.SECONDS);
        logger.info("打个日志");
-        System.out.println("redisson 配置完成。。。");
+       logger.error("打个日志");
+       logger.warn("打个日志");
        lock.unlock();
-
     }
+
+
 
 }

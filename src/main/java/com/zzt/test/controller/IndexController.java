@@ -66,4 +66,9 @@ public class IndexController {
         System.out.println("获取子对象："+primaryJdbcTemplateSupport.getPrimaryJdbc());
         primaryJdbcTemplateSupport.getPrimaryJdbc().query(" select id as id,user_name as name,user_password as pwd,user_email as email from blog_user",rowMapper).forEach(out::println);
     }
+
+
+    private void testAop(){
+        System.out.println("test sop");
+    }
 }

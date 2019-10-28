@@ -1,5 +1,7 @@
 package com.zzt.test.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -20,19 +22,22 @@ import java.util.concurrent.ConcurrentHashMap;
 })
 public class Config {
 
+    private final static Logger logger = LoggerFactory.getLogger(Config.class);
+
     @Autowired
     private Environment env;
 
 
     public void getAllProperties(){
          String[] str = env.getDefaultProfiles();
-        System.out.println("开始获取配置：");
-
-        Map check = new ConcurrentHashMap();
-
-        System.out.println(env.getProperty("zzt.name"));
+         logger.info("开始获取配置：{}",env.getProperty("zzt.name"));
          for (String e:str){
-             System.out.println(e);
+             showProperties(e);
          }
+    }
+
+
+    private void showProperties(String properties){
+        logger.info("配置参数：{}",properties);
     }
 }
